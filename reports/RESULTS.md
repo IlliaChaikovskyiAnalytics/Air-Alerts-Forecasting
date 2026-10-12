@@ -8,8 +8,8 @@ Data: 24 oblasts (Luhanska excluded; Crimea is not in the source), last full day
 - **Massive-strike day (proxy)**: summed alert-hours of rear regions >= trailing q90 and alerts in >= 10 rear regions. No ground-truth labels exist: heavy and massive are data-derived proxies.
 
 ## Selected models (chosen on data ending 28 days before the last day)
-- n: `EWMA 14d`
-- h: `Flat 28d`
+- n: `Fast-up 7/28d`
+- h: `EWMA 7d`
 - heavy: `Blend`
 - mass_day: `Clim`
 - any7: `GBM`
@@ -18,16 +18,16 @@ Data: 24 oblasts (Luhanska excluded; Crimea is not in the source), last full day
 ## Forecast, day 1 (regions by P(heavy day))
 | region | date | alerts_expected | hours_expected | p_heavy_day |
 |---|---|---|---|---|
-| Kyivska oblast | 2026-10-12 00:00:00 | 12.319 | 3.933 | 0.413 |
-| Cherkaska oblast | 2026-10-12 00:00:00 | 4.668 | 3.744 | 0.355 |
-| Mykolaivska oblast | 2026-10-12 00:00:00 | 13.985 | 5.014 | 0.326 |
-| Kyiv City | 2026-10-12 00:00:00 | 4.512 | 2.342 | 0.268 |
-| Kirovohradska oblast | 2026-10-12 00:00:00 | 6.911 | 4.230 | 0.262 |
-| Khmelnytska oblast | 2026-10-12 00:00:00 | 2.266 | 1.238 | 0.210 |
-| Zhytomyrska oblast | 2026-10-12 00:00:00 | 5.031 | 2.626 | 0.196 |
-| Poltavska oblast | 2026-10-12 00:00:00 | 6.971 | 4.039 | 0.171 |
-| Rivnenska oblast | 2026-10-12 00:00:00 | 3.038 | 1.434 | 0.146 |
-| Ternopilska oblast | 2026-10-12 00:00:00 | 0.956 | 3.380 | 0.144 |
+| Kyivska oblast | 2026-10-12 00:00:00 | 13.514 | 4.003 | 0.413 |
+| Cherkaska oblast | 2026-10-12 00:00:00 | 4.892 | 3.636 | 0.355 |
+| Mykolaivska oblast | 2026-10-12 00:00:00 | 15.017 | 5.004 | 0.326 |
+| Kyiv City | 2026-10-12 00:00:00 | 4.762 | 2.671 | 0.268 |
+| Kirovohradska oblast | 2026-10-12 00:00:00 | 7.298 | 4.386 | 0.262 |
+| Khmelnytska oblast | 2026-10-12 00:00:00 | 3.111 | 1.801 | 0.210 |
+| Zhytomyrska oblast | 2026-10-12 00:00:00 | 5.706 | 2.717 | 0.196 |
+| Poltavska oblast | 2026-10-12 00:00:00 | 6.914 | 4.136 | 0.171 |
+| Rivnenska oblast | 2026-10-12 00:00:00 | 3.972 | 1.637 | 0.146 |
+| Ternopilska oblast | 2026-10-12 00:00:00 | 1.494 | 1.823 | 0.144 |
 
 
 ## Massive strike
@@ -60,6 +60,9 @@ All origins:
 |---|---|---|---|---|---|---|---|---|
 | Blend | 1.742 | 0.599 | 1.007 | -0.288 | 0.185 | 0.836 | 1.616 | 29736 |
 | EWMA 14d | 1.715 | 0.594 | 0.995 | -0.270 | 0.183 | 0.795 | 1.482 | 29736 |
+| EWMA 3d | 1.734 | 0.587 | 1.010 | -0.119 | 0.190 | 0.795 | 1.531 | 29736 |
+| EWMA 7d | 1.697 | 0.583 | 0.993 | -0.179 | 0.184 | 0.802 | 1.493 | 29736 |
+| Fast-up 7/28d | 1.717 | 0.608 | 0.985 | -0.058 | 0.181 | 0.815 | 1.653 | 29736 |
 | Flat 28d | 1.719 | 0.593 | 1.002 | -0.220 | 0.186 | 0.797 | 1.471 | 29736 |
 | GBM | 1.829 | 0.617 | 1.044 | -0.305 | 0.193 | 0.837 | 1.750 | 29736 |
 
@@ -68,6 +71,9 @@ Latest window:
 |---|---|---|---|---|---|---|---|---|
 | Blend | 1.942 | 0.508 | 0.945 | -0.361 | 0.171 | 0.851 | 1.525 | 4704 |
 | EWMA 14d | 1.971 | 0.512 | 0.950 | -0.614 | 0.174 | 0.804 | 1.366 | 4704 |
+| EWMA 3d | 1.914 | 0.502 | 0.919 | -0.322 | 0.173 | 0.817 | 1.586 | 4704 |
+| EWMA 7d | 1.880 | 0.494 | 0.922 | -0.389 | 0.169 | 0.823 | 1.515 | 4704 |
+| Fast-up 7/28d | 1.918 | 0.505 | 0.925 | -0.262 | 0.170 | 0.828 | 1.543 | 4704 |
 | Flat 28d | 1.910 | 0.501 | 0.936 | -0.402 | 0.171 | 0.822 | 1.477 | 4704 |
 | GBM | 2.009 | 0.528 | 0.963 | -0.109 | 0.175 | 0.842 | 1.684 | 4704 |
 
@@ -78,6 +84,9 @@ All origins:
 |---|---|---|---|---|---|---|---|---|
 | Blend | 1.371 | 0.918 | 3.925 | -0.123 | 0.325 | 0.856 | 2.071 | 29736 |
 | EWMA 14d | 1.403 | 0.931 | 3.918 | -0.050 | 0.320 | 0.815 | 1.882 | 29736 |
+| EWMA 3d | 1.443 | 0.890 | 3.911 | -0.010 | 0.321 | 0.801 | 1.696 | 29736 |
+| EWMA 7d | 1.414 | 0.890 | 3.909 | -0.024 | 0.317 | 0.812 | 1.714 | 29736 |
+| Fast-up 7/28d | 1.475 | 1.020 | 3.922 | 0.144 | 0.324 | 0.831 | 2.297 | 29736 |
 | Flat 28d | 1.431 | 0.895 | 3.911 | -0.031 | 0.320 | 0.807 | 1.672 | 29736 |
 | GBM | 1.357 | 0.917 | 3.945 | -0.196 | 0.337 | 0.867 | 2.260 | 29736 |
 
@@ -86,6 +95,9 @@ Latest window:
 |---|---|---|---|---|---|---|---|---|
 | Blend | 1.331 | 0.554 | 1.060 | -0.161 | 0.192 | 0.873 | 1.882 | 4704 |
 | EWMA 14d | 1.358 | 0.558 | 1.060 | -0.112 | 0.192 | 0.791 | 1.523 | 4704 |
+| EWMA 3d | 1.407 | 0.572 | 1.078 | -0.052 | 0.196 | 0.796 | 1.644 | 4704 |
+| EWMA 7d | 1.367 | 0.556 | 1.053 | -0.045 | 0.192 | 0.804 | 1.613 | 4704 |
+| Fast-up 7/28d | 1.391 | 0.580 | 1.055 | 0.055 | 0.190 | 0.814 | 1.687 | 4704 |
 | Flat 28d | 1.374 | 0.555 | 1.052 | -0.018 | 0.193 | 0.794 | 1.559 | 4704 |
 | GBM | 1.315 | 0.556 | 1.076 | -0.210 | 0.201 | 0.873 | 2.241 | 4704 |
 
@@ -164,21 +176,21 @@ Latest window:
 Standardised errors (forecast - actual, divided by the region's level scale), per region, 7 lags. Under no autocorrelation about 5% of regions would have p < 0.05; `mean_resid_z` < 0 means under-forecasting. `national_*` is the same test on the cross-region mean error.
 | target | model | h | lags | regions | share_p_lt_05 | median_p | mean_resid_z | national_Q | national_p |
 |---|---|---|---|---|---|---|---|---|---|
-| alerts | EWMA 14d | 1 | 7 | 24 | 0.5000 | 0.0510 | -0.0754 | 25.1098 | 0.0007 |
-| alerts | EWMA 14d | 7 | 7 | 24 | 0.8750 | 0.0001 | -0.1112 | 48.0297 | 0.0000 |
-| hours | Flat 28d | 1 | 7 | 24 | 0.5833 | 0.0292 | -0.1632 | 32.7590 | 0.0000 |
-| hours | Flat 28d | 7 | 7 | 24 | 0.7083 | 0.0003 | -0.2839 | 80.3353 | 0.0000 |
+| alerts | Fast-up 7/28d | 1 | 7 | 24 | 0.5417 | 0.0372 | -0.0021 | 23.2029 | 0.0016 |
+| alerts | Fast-up 7/28d | 7 | 7 | 24 | 0.8750 | 0.0000 | -0.0381 | 44.8167 | 0.0000 |
+| hours | EWMA 7d | 1 | 7 | 24 | 0.3333 | 0.1128 | -0.1409 | 26.8737 | 0.0004 |
+| hours | EWMA 7d | 7 | 7 | 24 | 0.7917 | 0.0012 | -0.2599 | 81.7066 | 0.0000 |
 
 ### Bias by regime (h=1)
 Mean standardised error by the recent trend of the target (previous 7 days vs the 28 before). Negative = under-forecasting; a bias concentrated in 'rising' means the level estimate lags behind regime changes.
 | target | model | regime | mean_resid_z | n |
 |---|---|---|---|---|
-| alerts | EWMA 14d | falling | 0.001 | 1146 |
-| alerts | EWMA 14d | stable | -0.042 | 1150 |
-| alerts | EWMA 14d | rising | -0.187 | 1140 |
-| hours | Flat 28d | falling | -0.006 | 1146 |
-| hours | Flat 28d | stable | -0.035 | 1145 |
-| hours | Flat 28d | rising | -0.331 | 1145 |
+| alerts | Fast-up 7/28d | falling | 0.062 | 1146 |
+| alerts | Fast-up 7/28d | stable | -0.006 | 1150 |
+| alerts | Fast-up 7/28d | rising | -0.050 | 1140 |
+| hours | EWMA 7d | falling | -0.077 | 1146 |
+| hours | EWMA 7d | stable | -0.031 | 1145 |
+| hours | EWMA 7d | rising | -0.165 | 1145 |
 
 ### Diebold-Mariano: each candidate vs a fixed reference model
 Loss differential = loss(reference) - loss(model) per target day (mean over regions), HAC variance with lag h-1, Harvey-Leybourne-Newbold correction. `rel_gain` > 0 and small p: the model is significantly better than the reference. References are fixed a priori (Flat 28d, Recent 28d, Clim, Recent 28d independence). Many comparisons are shown; do not read single p-values near 0.05 as findings.
@@ -187,6 +199,15 @@ Loss differential = loss(reference) - loss(model) per target day (mean over regi
 | alerts | EWMA 14d | Flat 28d | h=1 | 180 | 0.0163 | 3.6665 | 0.0003 |
 | alerts | EWMA 14d | Flat 28d | h=7 | 174 | 0.0115 | 2.0907 | 0.0380 |
 | alerts | EWMA 14d | Flat 28d | all h | 180 | 0.0133 | 2.3261 | 0.0211 |
+| alerts | EWMA 3d | Flat 28d | h=1 | 180 | 0.0067 | 0.4678 | 0.6405 |
+| alerts | EWMA 3d | Flat 28d | h=7 | 174 | -0.0356 | -1.6919 | 0.0925 |
+| alerts | EWMA 3d | Flat 28d | all h | 180 | -0.0252 | -1.4281 | 0.1550 |
+| alerts | EWMA 7d | Flat 28d | h=1 | 180 | 0.0219 | 3.0079 | 0.0030 |
+| alerts | EWMA 7d | Flat 28d | h=7 | 174 | 0.0036 | 0.3802 | 0.7043 |
+| alerts | EWMA 7d | Flat 28d | all h | 180 | 0.0093 | 1.0331 | 0.3029 |
+| alerts | Fast-up 7/28d | Flat 28d | h=1 | 180 | 0.0275 | 3.2884 | 0.0012 |
+| alerts | Fast-up 7/28d | Flat 28d | h=7 | 174 | 0.0251 | 2.4197 | 0.0166 |
+| alerts | Fast-up 7/28d | Flat 28d | all h | 180 | 0.0249 | 2.3644 | 0.0191 |
 | alerts | GBM | Flat 28d | h=1 | 180 | -0.0454 | -5.0028 | 0.0000 |
 | alerts | GBM | Flat 28d | h=7 | 174 | -0.0419 | -3.6259 | 0.0004 |
 | alerts | GBM | Flat 28d | all h | 180 | -0.0406 | -4.2320 | 0.0000 |
@@ -196,6 +217,15 @@ Loss differential = loss(reference) - loss(model) per target day (mean over regi
 | hours | EWMA 14d | Flat 28d | h=1 | 180 | -0.0009 | -0.1451 | 0.8848 |
 | hours | EWMA 14d | Flat 28d | h=7 | 174 | -0.0006 | -0.0784 | 0.9376 |
 | hours | EWMA 14d | Flat 28d | all h | 180 | -0.0012 | -0.2012 | 0.8408 |
+| hours | EWMA 3d | Flat 28d | h=1 | 180 | 0.0162 | 1.3434 | 0.1809 |
+| hours | EWMA 3d | Flat 28d | h=7 | 174 | -0.0134 | -1.3453 | 0.1803 |
+| hours | EWMA 3d | Flat 28d | all h | 180 | -0.0070 | -0.8112 | 0.4183 |
+| hours | EWMA 7d | Flat 28d | h=1 | 180 | 0.0192 | 2.9157 | 0.0040 |
+| hours | EWMA 7d | Flat 28d | h=7 | 174 | 0.0040 | 0.6190 | 0.5368 |
+| hours | EWMA 7d | Flat 28d | all h | 180 | 0.0064 | 1.3278 | 0.1859 |
+| hours | Fast-up 7/28d | Flat 28d | h=1 | 180 | -0.0155 | -1.5292 | 0.1280 |
+| hours | Fast-up 7/28d | Flat 28d | h=7 | 174 | -0.0150 | -1.1165 | 0.2657 |
+| hours | Fast-up 7/28d | Flat 28d | all h | 180 | -0.0128 | -1.1444 | 0.2540 |
 | hours | GBM | Flat 28d | h=1 | 180 | -0.0697 | -6.5053 | 0.0000 |
 | hours | GBM | Flat 28d | h=7 | 174 | -0.0506 | -4.2719 | 0.0000 |
 | hours | GBM | Flat 28d | all h | 180 | -0.0565 | -4.5228 | 0.0000 |

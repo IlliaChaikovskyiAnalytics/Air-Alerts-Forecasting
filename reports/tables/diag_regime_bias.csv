@@ -1,7 +1,7 @@
 target,model,regime,mean_resid_z,n
-alerts,EWMA 14d,falling,0.0006704705625835889,1146
-alerts,EWMA 14d,stable,-0.041705705710272954,1150
-alerts,EWMA 14d,rising,-0.1872024521794877,1140
-hours,Flat 28d,falling,-0.005684424067113294,1146
-hours,Flat 28d,stable,-0.034620685844374645,1145
-hours,Flat 28d,rising,-0.3311868688778961,1145
+alerts,Fast-up 7/28d,falling,0.06157732532064448,1146
+alerts,Fast-up 7/28d,stable,-0.00583346465233666,1150
+alerts,Fast-up 7/28d,rising,-0.04968010817011384,1140
+hours,EWMA 7d,falling,-0.07679338884373747,1146
+hours,EWMA 7d,stable,-0.03093689244091293,1145
+hours,EWMA 7d,rising,-0.16541236278059152,1145

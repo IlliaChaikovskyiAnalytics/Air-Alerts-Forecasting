@@ -23,6 +23,7 @@ REG_NON_FEATURES = {"region", "origin", "target_date", "y_n", "y_h", "y_heavy", 
 NAT_NON_FEATURES = {"origin", "target_date", "y_mass", "y_any"}
 # the 56-day quantile columns only exist for the baselines
 DROP_FROM_MODEL = {c for c in [f"{k}_q{int(q * 100)}_56" for k in "nh" for q in C.QUANTILES]}
+DROP_FROM_MODEL |= {f"{k}_ewm{hl}" for k in "nh" for hl in (3, 7, 28)}   # baseline-only level trackers
 
 
 def reg_feature_cols(D: pd.DataFrame) -> list[str]:

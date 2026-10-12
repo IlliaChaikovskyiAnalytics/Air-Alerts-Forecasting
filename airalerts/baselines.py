@@ -2,6 +2,7 @@
 
 Regional daily n_alerts / alert_hours (mean + 10/50/90 % quantiles):
     Flat 28d  : mean of the last 28 days
+    EWMA 3d/7d: same with shorter half-lives;  Fast-up 7/28d: max(EWMA 7d, EWMA 28d)
     EWMA 14d  : exponentially weighted mean, half-life 14 days  (adaptive level, the 'regime tracker')
   Prediction band = empirical 10/50/90 % quantiles of the last 56 days, rescaled to the baseline's level.
 Regional heavy-day probability:
@@ -37,8 +38,13 @@ def level_forecast(D: pd.DataFrame, key: str, level_col: str) -> pd.DataFrame:
 
 def regional_baselines(D: pd.DataFrame) -> dict[str, pd.DataFrame]:
     res = {}
-    for name, (nc, hc) in {"Flat 28d": ("n_m28", "h_m28"), "EWMA 14d": ("n_ewm14", "h_ewm14")}.items():
+    for name, (nc, hc) in {"Flat 28d": ("n_m28", "h_m28"), "EWMA 14d": ("n_ewm14", "h_ewm14"),
+                           "EWMA 3d": ("n_ewm3", "h_ewm3"), "EWMA 7d": ("n_ewm7", "h_ewm7")}.items():
         res[name] = pd.concat([level_forecast(D, "n", nc), level_forecast(D, "h", hc)], axis=1)
+    # asymmetric tracker: reacts quickly to increases (fast level when above the slow one), decays slowly otherwise.
+    # Motivated by the diagnosed bias (under-forecasting in rising regimes only).
+    D = D.assign(n_up=np.maximum(D["n_ewm7"], D["n_ewm28"]), h_up=np.maximum(D["h_ewm7"], D["h_ewm28"]))
+    res["Fast-up 7/28d"] = pd.concat([level_forecast(D, "n", "n_up"), level_forecast(D, "h", "h_up")], axis=1)
     return res
 
 

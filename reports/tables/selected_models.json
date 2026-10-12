@@ -1,6 +1,6 @@
 {
-  "n": "EWMA 14d",
-  "h": "Flat 28d",
+  "n": "Fast-up 7/28d",
+  "h": "EWMA 7d",
   "heavy": "Blend",
   "mass_day": "Clim",
   "any7": "GBM"
