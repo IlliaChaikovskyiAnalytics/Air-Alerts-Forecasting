@@ -10,7 +10,7 @@ import warnings
 import pandas as pd
 
 from . import config as C
-from . import data, evaluation, features, plots, report
+from . import data, diagnostics, evaluation, features, plots, report
 from .backtest import run_backtest
 from .forecast import make_forecast
 
@@ -55,8 +55,10 @@ def run(download: bool = False, refresh_backtest: bool = False, verbose: bool = 
 
     sel = evaluation.select_models(bt, panel.last_day)
     tables = evaluation.evaluation_tables(bt, panel.last_day)
+    tables["ljung_box"] = diagnostics.ljung_box_table(bt, sel)
+    tables["diebold_mariano"] = diagnostics.dm_table(bt)
     for k, v in tables.items():
-        v.to_csv(out / "tables" / f"eval_{k}.csv", index=False)
+        v.to_csv(out / "tables" / (f"eval_{k}.csv" if k not in ("ljung_box", "diebold_mariano") else f"diag_{k}.csv"), index=False)
     print("selected models:", sel, flush=True)
 
     print("fitting the production models and forecasting ...", flush=True)

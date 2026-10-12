@@ -64,6 +64,15 @@ def write_report(panel, A, bt, sel, tables, fc, path: Path) -> None:
     L.append(_skill_line(d, "Blend", "Clim 10%", "brier", "heavy day, Blend"))
     L.append(_skill_line(d, "GBM", "Clim 10%", "brier", "heavy day, GBM"))
 
+    L.append("\n## Diagnostics\n### Ljung-Box: autocorrelation of forecast errors (selected models)\n"
+             "Standardised errors (forecast - actual, divided by the region's level scale), per region, 7 lags. "
+             "Under no autocorrelation about 5% of regions would have p < 0.05; `mean_resid_z` < 0 means under-forecasting. "
+             "`national_*` is the same test on the cross-region mean error.\n" + md_table(tables["ljung_box"], 4)
+             + "\n### Diebold-Mariano: each candidate vs a fixed reference model\n"
+             "Loss differential = loss(reference) - loss(model) per target day (mean over regions), HAC variance with lag h-1, "
+             "Harvey-Leybourne-Newbold correction. `rel_gain` > 0 and small p: the model is significantly better than the reference. "
+             "References are fixed a priori (Flat 28d, Recent 28d, Clim, Recent 28d independence). Many comparisons are shown; "
+             "do not read single p-values near 0.05 as findings.\n" + md_table(tables["diebold_mariano"], 4))
     L.append("\n## Caveats\n- Most skill comes from the current regime level; ML adds little where the table shows no gain.\n"
              "- Massive-strike labels are a proxy; probabilities with AUC near 0.5 carry no discriminative information.\n"
              f"- The latest window has only {C.LATEST_WINDOW_DAYS} origins; any-7-day results there are statistically unstable.\n"

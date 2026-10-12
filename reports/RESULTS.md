@@ -159,6 +159,67 @@ Latest window:
 - heavy day, GBM: `GBM` vs `Clim 10%` skill = +1.5% (90% block-bootstrap CI -0.3% .. +3.3%)
 
 
+## Diagnostics
+### Ljung-Box: autocorrelation of forecast errors (selected models)
+Standardised errors (forecast - actual, divided by the region's level scale), per region, 7 lags. Under no autocorrelation about 5% of regions would have p < 0.05; `mean_resid_z` < 0 means under-forecasting. `national_*` is the same test on the cross-region mean error.
+| target | model | h | lags | regions | share_p_lt_05 | median_p | mean_resid_z | national_Q | national_p |
+|---|---|---|---|---|---|---|---|---|---|
+| alerts | EWMA 14d | 1 | 7 | 24 | 0.5000 | 0.0510 | -0.0754 | 25.1098 | 0.0007 |
+| alerts | EWMA 14d | 7 | 7 | 24 | 0.8750 | 0.0001 | -0.1112 | 48.0297 | 0.0000 |
+| hours | Flat 28d | 1 | 7 | 24 | 0.5833 | 0.0292 | -0.1632 | 32.7590 | 0.0000 |
+| hours | Flat 28d | 7 | 7 | 24 | 0.7083 | 0.0003 | -0.2839 | 80.3353 | 0.0000 |
+
+### Diebold-Mariano: each candidate vs a fixed reference model
+Loss differential = loss(reference) - loss(model) per target day (mean over regions), HAC variance with lag h-1, Harvey-Leybourne-Newbold correction. `rel_gain` > 0 and small p: the model is significantly better than the reference. References are fixed a priori (Flat 28d, Recent 28d, Clim, Recent 28d independence). Many comparisons are shown; do not read single p-values near 0.05 as findings.
+| target | model | ref | scope | T | rel_gain | DM | p_value |
+|---|---|---|---|---|---|---|---|
+| alerts | EWMA 14d | Flat 28d | h=1 | 180 | 0.0163 | 3.6665 | 0.0003 |
+| alerts | EWMA 14d | Flat 28d | h=7 | 174 | 0.0115 | 2.0907 | 0.0380 |
+| alerts | EWMA 14d | Flat 28d | all h | 180 | 0.0133 | 2.3261 | 0.0211 |
+| alerts | GBM | Flat 28d | h=1 | 180 | -0.0454 | -5.0028 | 0.0000 |
+| alerts | GBM | Flat 28d | h=7 | 174 | -0.0419 | -3.6259 | 0.0004 |
+| alerts | GBM | Flat 28d | all h | 180 | -0.0406 | -4.2320 | 0.0000 |
+| alerts | Blend | Flat 28d | h=1 | 180 | 0.0001 | 0.0108 | 0.9914 |
+| alerts | Blend | Flat 28d | h=7 | 174 | -0.0007 | -0.0962 | 0.9234 |
+| alerts | Blend | Flat 28d | all h | 180 | 0.0007 | 0.1156 | 0.9081 |
+| hours | EWMA 14d | Flat 28d | h=1 | 180 | -0.0009 | -0.1451 | 0.8848 |
+| hours | EWMA 14d | Flat 28d | h=7 | 174 | -0.0006 | -0.0784 | 0.9376 |
+| hours | EWMA 14d | Flat 28d | all h | 180 | -0.0012 | -0.2012 | 0.8408 |
+| hours | GBM | Flat 28d | h=1 | 180 | -0.0697 | -6.5053 | 0.0000 |
+| hours | GBM | Flat 28d | h=7 | 174 | -0.0506 | -4.2719 | 0.0000 |
+| hours | GBM | Flat 28d | all h | 180 | -0.0565 | -4.5228 | 0.0000 |
+| hours | Blend | Flat 28d | h=1 | 180 | -0.0179 | -2.3795 | 0.0184 |
+| hours | Blend | Flat 28d | h=7 | 174 | -0.0120 | -1.2656 | 0.2074 |
+| hours | Blend | Flat 28d | all h | 180 | -0.0159 | -1.8312 | 0.0687 |
+| heavy | Clim 10% | Recent 28d | h=1 | 180 | -0.0258 | -1.7336 | 0.0847 |
+| heavy | Clim 10% | Recent 28d | h=7 | 174 | 0.0125 | 0.7312 | 0.4657 |
+| heavy | Clim 10% | Recent 28d | all h | 180 | -0.0006 | -0.0318 | 0.9746 |
+| heavy | GBM | Recent 28d | h=1 | 180 | 0.0016 | 0.1678 | 0.8669 |
+| heavy | GBM | Recent 28d | h=7 | 174 | 0.0258 | 2.4740 | 0.0143 |
+| heavy | GBM | Recent 28d | all h | 180 | 0.0118 | 0.9762 | 0.3303 |
+| heavy | Blend | Recent 28d | h=1 | 180 | 0.0158 | 3.2746 | 0.0013 |
+| heavy | Blend | Recent 28d | h=7 | 174 | 0.0278 | 4.9619 | 0.0000 |
+| heavy | Blend | Recent 28d | all h | 180 | 0.0206 | 3.3103 | 0.0011 |
+| massive_day | Recent 28d | Clim | h=1 | 180 | 0.0244 | 0.6103 | 0.5425 |
+| massive_day | Recent 28d | Clim | h=7 | 174 | -0.0295 | -0.5715 | 0.5684 |
+| massive_day | Recent 28d | Clim | all h | 180 | -0.0147 | -0.3096 | 0.7572 |
+| massive_day | Recent 90d | Clim | h=1 | 180 | -0.0087 | -0.6119 | 0.5414 |
+| massive_day | Recent 90d | Clim | h=7 | 174 | -0.0177 | -1.1523 | 0.2508 |
+| massive_day | Recent 90d | Clim | all h | 180 | -0.0169 | -1.0455 | 0.2972 |
+| massive_day | Logistic | Clim | h=1 | 180 | 0.0375 | 0.7656 | 0.4449 |
+| massive_day | Logistic | Clim | h=7 | 174 | -0.0628 | -1.1361 | 0.2575 |
+| massive_day | Logistic | Clim | all h | 180 | -0.0223 | -0.5240 | 0.6009 |
+| massive_day | GBM | Clim | h=1 | 180 | -0.0075 | -0.2325 | 0.8164 |
+| massive_day | GBM | Clim | h=7 | 174 | -0.0529 | -2.0385 | 0.0430 |
+| massive_day | GBM | Clim | all h | 180 | -0.0237 | -0.7920 | 0.4294 |
+| massive_day | Hazard GBM | Clim | h=1 | 180 | -0.0098 | -0.7019 | 0.4837 |
+| massive_day | Hazard GBM | Clim | h=7 | 174 | -0.0333 | -2.8389 | 0.0051 |
+| massive_day | Hazard GBM | Clim | all h | 180 | -0.0332 | -3.4700 | 0.0007 |
+| massive_any7 | Recent 90d (indep.) | Recent 28d (indep.) | all origins | 174 | 0.0246 | 0.2234 | 0.8235 |
+| massive_any7 | Logistic | Recent 28d (indep.) | all origins | 174 | 0.0342 | 0.1909 | 0.8489 |
+| massive_any7 | GBM | Recent 28d (indep.) | all origins | 174 | 0.1554 | 0.7727 | 0.4408 |
+
+
 ## Caveats
 - Most skill comes from the current regime level; ML adds little where the table shows no gain.
 - Massive-strike labels are a proxy; probabilities with AUC near 0.5 carry no discriminative information.

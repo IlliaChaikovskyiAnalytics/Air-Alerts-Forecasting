@@ -53,3 +53,23 @@ def test_excluded_region_absent():
     if (C.RAW_DIR / C.VOLUNTEER_FILE).exists():
         P = data.build_panel()
         assert "Luhanska oblast" not in P.regions
+
+
+def test_ljung_box_detects_autocorrelation():
+    from airalerts import diagnostics as G
+    rng = np.random.default_rng(0)
+    white = rng.normal(size=400)
+    ar = np.zeros(400)
+    for t in range(1, 400):
+        ar[t] = 0.7 * ar[t - 1] + rng.normal()
+    assert G.ljung_box(white, 7)[1] > 0.01
+    assert G.ljung_box(ar, 7)[1] < 1e-6
+
+
+def test_dm_detects_better_model():
+    from airalerts import diagnostics as G
+    rng = np.random.default_rng(1)
+    d = 0.3 + rng.normal(size=300)         # model has lower loss on average
+    stat, p = G.dm_test(d, 1)
+    assert stat > 0 and p < 0.01
+    assert G.dm_test(rng.normal(size=300), 1)[1] > 0.01
