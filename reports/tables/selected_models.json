@@ -1,0 +1,7 @@
+{
+  "n": "EWMA 14d",
+  "h": "Flat 28d",
+  "heavy": "Blend",
+  "mass_day": "Clim",
+  "any7": "GBM"
+}

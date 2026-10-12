@@ -1,0 +1,6 @@
+__pycache__/
+.venv/
+.idea/
+reports/cache/
+data/raw/*.csv
+*.pkl

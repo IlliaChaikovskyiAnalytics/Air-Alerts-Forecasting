@@ -1,0 +1,5 @@
+model,p_any_massive_next7,selected
+Recent 28d (indep.),0.8151359146547297,False
+Recent 90d (indep.),0.7459469155450518,False
+Logistic,0.3960388556049507,False
+GBM,0.33347190097584656,True
