@@ -103,3 +103,24 @@ def dm_table(bt) -> pd.DataFrame:
     a7 = MT.add_prob_losses(a7, "y_any")
     rows += _dm_rows(a7, "brier", "massive_any7", lambda df: [("all origins", C.HORIZON, df)])
     return pd.DataFrame(rows)
+
+
+def regime_bias_table(bt, sel: dict) -> pd.DataFrame:
+    """Mean standardised error (forecast - actual) of the selected model at h=1, split into thirds by the recent trend
+    of the target: mean of the previous 7 days / mean of the 28 days before that - 1 (known at forecast time).
+    Negative = under-forecasting."""
+    rows = []
+    for key, name in (("n", "alerts"), ("h", "hours")):
+        d = MT.add_reg_losses(bt.reg, key)
+        d = d[(d["model"] == sel[key]) & (d["h"] == 1)]
+        y = d.pivot(index="target_date", columns="region", values=f"y_{key}").sort_index()
+        z = (d["err"] / d[f"scale_{key}"]).rename("z").to_frame().assign(target_date=d["target_date"], region=d["region"])
+        z = z.pivot(index="target_date", columns="region", values="z").sort_index()
+        with np.errstate(divide="ignore", invalid="ignore"):
+            chg = y.shift(1).rolling(7).mean() / y.shift(8).rolling(28).mean() - 1
+        s = pd.DataFrame({"trend": chg.stack(), "z": z.stack()}).replace([np.inf, -np.inf], np.nan).dropna()
+        s["regime"] = pd.qcut(s["trend"], 3, labels=["falling", "stable", "rising"])
+        g = s.groupby("regime", observed=True)["z"].agg(["mean", "count"]).reset_index()
+        g.insert(0, "model", sel[key]); g.insert(0, "target", name)
+        rows.append(g.rename(columns={"mean": "mean_resid_z", "count": "n"}))
+    return pd.concat(rows, ignore_index=True)

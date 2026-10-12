@@ -68,12 +68,16 @@ def write_report(panel, A, bt, sel, tables, fc, path: Path) -> None:
              "Standardised errors (forecast - actual, divided by the region's level scale), per region, 7 lags. "
              "Under no autocorrelation about 5% of regions would have p < 0.05; `mean_resid_z` < 0 means under-forecasting. "
              "`national_*` is the same test on the cross-region mean error.\n" + md_table(tables["ljung_box"], 4)
+             + "\n### Bias by regime (h=1)\nMean standardised error by the recent trend of the target (previous 7 days vs the 28 before). "
+             "Negative = under-forecasting; a bias concentrated in 'rising' means the level estimate lags behind regime changes.\n"
+             + md_table(tables["regime_bias"], 3)
              + "\n### Diebold-Mariano: each candidate vs a fixed reference model\n"
              "Loss differential = loss(reference) - loss(model) per target day (mean over regions), HAC variance with lag h-1, "
              "Harvey-Leybourne-Newbold correction. `rel_gain` > 0 and small p: the model is significantly better than the reference. "
              "References are fixed a priori (Flat 28d, Recent 28d, Clim, Recent 28d independence). Many comparisons are shown; "
              "do not read single p-values near 0.05 as findings.\n" + md_table(tables["diebold_mariano"], 4))
-    L.append("\n## Caveats\n- Most skill comes from the current regime level; ML adds little where the table shows no gain.\n"
+    L.append("\n## Caveats\n- Forecast errors are autocorrelated (Ljung-Box) and biased downwards, almost entirely in periods when alert intensity "
+             "is rising: the level estimate lags behind regime changes. Nominal 80% intervals should therefore be read as optimistic.\n- Most skill comes from the current regime level; ML adds little where the table shows no gain.\n"
              "- Massive-strike labels are a proxy; probabilities with AUC near 0.5 carry no discriminative information.\n"
              f"- The latest window has only {C.LATEST_WINDOW_DAYS} origins; any-7-day results there are statistically unstable.\n"
              "- Alerts are a reaction to attacks, not the attacks themselves; no text/media signals are used.\n")

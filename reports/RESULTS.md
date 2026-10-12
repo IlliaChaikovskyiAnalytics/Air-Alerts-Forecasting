@@ -169,6 +169,17 @@ Standardised errors (forecast - actual, divided by the region's level scale), pe
 | hours | Flat 28d | 1 | 7 | 24 | 0.5833 | 0.0292 | -0.1632 | 32.7590 | 0.0000 |
 | hours | Flat 28d | 7 | 7 | 24 | 0.7083 | 0.0003 | -0.2839 | 80.3353 | 0.0000 |
 
+### Bias by regime (h=1)
+Mean standardised error by the recent trend of the target (previous 7 days vs the 28 before). Negative = under-forecasting; a bias concentrated in 'rising' means the level estimate lags behind regime changes.
+| target | model | regime | mean_resid_z | n |
+|---|---|---|---|---|
+| alerts | EWMA 14d | falling | 0.001 | 1146 |
+| alerts | EWMA 14d | stable | -0.042 | 1150 |
+| alerts | EWMA 14d | rising | -0.187 | 1140 |
+| hours | Flat 28d | falling | -0.006 | 1146 |
+| hours | Flat 28d | stable | -0.035 | 1145 |
+| hours | Flat 28d | rising | -0.331 | 1145 |
+
 ### Diebold-Mariano: each candidate vs a fixed reference model
 Loss differential = loss(reference) - loss(model) per target day (mean over regions), HAC variance with lag h-1, Harvey-Leybourne-Newbold correction. `rel_gain` > 0 and small p: the model is significantly better than the reference. References are fixed a priori (Flat 28d, Recent 28d, Clim, Recent 28d independence). Many comparisons are shown; do not read single p-values near 0.05 as findings.
 | target | model | ref | scope | T | rel_gain | DM | p_value |
@@ -221,6 +232,7 @@ Loss differential = loss(reference) - loss(model) per target day (mean over regi
 
 
 ## Caveats
+- Forecast errors are autocorrelated (Ljung-Box) and biased downwards, almost entirely in periods when alert intensity is rising: the level estimate lags behind regime changes. Nominal 80% intervals should therefore be read as optimistic.
 - Most skill comes from the current regime level; ML adds little where the table shows no gain.
 - Massive-strike labels are a proxy; probabilities with AUC near 0.5 carry no discriminative information.
 - The latest window has only 28 origins; any-7-day results there are statistically unstable.
