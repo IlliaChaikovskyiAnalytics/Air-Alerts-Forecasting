@@ -18,16 +18,16 @@ Data: 24 oblasts (Luhanska excluded; Crimea is not in the source), last full day
 ## Forecast, day 1 (regions by P(heavy day))
 | region | date | alerts_expected | hours_expected | p_heavy_day |
 |---|---|---|---|---|
-| Kyivska oblast | 2026-10-12 00:00:00 | 13.514 | 4.003 | 0.413 |
+| Kyivska oblast | 2026-10-12 00:00:00 | 13.514 | 4.003 | 0.449 |
 | Cherkaska oblast | 2026-10-12 00:00:00 | 4.892 | 3.636 | 0.355 |
-| Mykolaivska oblast | 2026-10-12 00:00:00 | 15.017 | 5.004 | 0.326 |
-| Kyiv City | 2026-10-12 00:00:00 | 4.762 | 2.671 | 0.268 |
-| Kirovohradska oblast | 2026-10-12 00:00:00 | 7.298 | 4.386 | 0.262 |
-| Khmelnytska oblast | 2026-10-12 00:00:00 | 3.111 | 1.801 | 0.210 |
-| Zhytomyrska oblast | 2026-10-12 00:00:00 | 5.706 | 2.717 | 0.196 |
-| Poltavska oblast | 2026-10-12 00:00:00 | 6.914 | 4.136 | 0.171 |
-| Rivnenska oblast | 2026-10-12 00:00:00 | 3.972 | 1.637 | 0.146 |
-| Ternopilska oblast | 2026-10-12 00:00:00 | 1.494 | 1.823 | 0.144 |
+| Mykolaivska oblast | 2026-10-12 00:00:00 | 15.017 | 5.004 | 0.316 |
+| Kirovohradska oblast | 2026-10-12 00:00:00 | 7.298 | 4.386 | 0.295 |
+| Kyiv City | 2026-10-12 00:00:00 | 4.762 | 2.671 | 0.262 |
+| Zhytomyrska oblast | 2026-10-12 00:00:00 | 5.706 | 2.717 | 0.226 |
+| Khmelnytska oblast | 2026-10-12 00:00:00 | 3.111 | 1.801 | 0.202 |
+| Poltavska oblast | 2026-10-12 00:00:00 | 6.914 | 4.136 | 0.172 |
+| Ternopilska oblast | 2026-10-12 00:00:00 | 1.494 | 1.823 | 0.158 |
+| Rivnenska oblast | 2026-10-12 00:00:00 | 3.972 | 1.637 | 0.148 |
 
 
 ## Massive strike
@@ -58,65 +58,65 @@ P(at least one massive-strike day in the next 7 days):
 All origins:
 | model | MAE | sMAE | sRMSE | bias | sPinball | cover80 | width_s | n |
 |---|---|---|---|---|---|---|---|---|
-| Blend | 1.742 | 0.599 | 1.007 | -0.288 | 0.185 | 0.836 | 1.616 | 29736 |
+| Blend | 1.731 | 0.598 | 1.007 | -0.292 | 0.186 | 0.838 | 1.633 | 29736 |
 | EWMA 14d | 1.715 | 0.594 | 0.995 | -0.270 | 0.183 | 0.795 | 1.482 | 29736 |
 | EWMA 3d | 1.734 | 0.587 | 1.010 | -0.119 | 0.190 | 0.795 | 1.531 | 29736 |
 | EWMA 7d | 1.697 | 0.583 | 0.993 | -0.179 | 0.184 | 0.802 | 1.493 | 29736 |
 | Fast-up 7/28d | 1.717 | 0.608 | 0.985 | -0.058 | 0.181 | 0.815 | 1.653 | 29736 |
 | Flat 28d | 1.719 | 0.593 | 1.002 | -0.220 | 0.186 | 0.797 | 1.471 | 29736 |
-| GBM | 1.829 | 0.617 | 1.044 | -0.305 | 0.193 | 0.837 | 1.750 | 29736 |
+| GBM | 1.796 | 0.614 | 1.042 | -0.315 | 0.194 | 0.842 | 1.784 | 29736 |
 
 Latest window:
 | model | MAE | sMAE | sRMSE | bias | sPinball | cover80 | width_s | n |
 |---|---|---|---|---|---|---|---|---|
-| Blend | 1.942 | 0.508 | 0.945 | -0.361 | 0.171 | 0.851 | 1.525 | 4704 |
+| Blend | 1.930 | 0.505 | 0.943 | -0.368 | 0.172 | 0.849 | 1.516 | 4704 |
 | EWMA 14d | 1.971 | 0.512 | 0.950 | -0.614 | 0.174 | 0.804 | 1.366 | 4704 |
 | EWMA 3d | 1.914 | 0.502 | 0.919 | -0.322 | 0.173 | 0.817 | 1.586 | 4704 |
 | EWMA 7d | 1.880 | 0.494 | 0.922 | -0.389 | 0.169 | 0.823 | 1.515 | 4704 |
 | Fast-up 7/28d | 1.918 | 0.505 | 0.925 | -0.262 | 0.170 | 0.828 | 1.543 | 4704 |
 | Flat 28d | 1.910 | 0.501 | 0.936 | -0.402 | 0.171 | 0.822 | 1.477 | 4704 |
-| GBM | 2.009 | 0.528 | 0.963 | -0.109 | 0.175 | 0.842 | 1.684 | 4704 |
+| GBM | 1.976 | 0.522 | 0.958 | -0.122 | 0.176 | 0.837 | 1.665 | 4704 |
 
 
 ### Alert-hours per day
 All origins:
 | model | MAE | sMAE | sRMSE | bias | sPinball | cover80 | width_s | n |
 |---|---|---|---|---|---|---|---|---|
-| Blend | 1.371 | 0.918 | 3.925 | -0.123 | 0.325 | 0.856 | 2.071 | 29736 |
+| Blend | 1.377 | 0.922 | 3.923 | -0.115 | 0.323 | 0.859 | 2.064 | 29736 |
 | EWMA 14d | 1.403 | 0.931 | 3.918 | -0.050 | 0.320 | 0.815 | 1.882 | 29736 |
 | EWMA 3d | 1.443 | 0.890 | 3.911 | -0.010 | 0.321 | 0.801 | 1.696 | 29736 |
 | EWMA 7d | 1.414 | 0.890 | 3.909 | -0.024 | 0.317 | 0.812 | 1.714 | 29736 |
 | Fast-up 7/28d | 1.475 | 1.020 | 3.922 | 0.144 | 0.324 | 0.831 | 2.297 | 29736 |
 | Flat 28d | 1.431 | 0.895 | 3.911 | -0.031 | 0.320 | 0.807 | 1.672 | 29736 |
-| GBM | 1.357 | 0.917 | 3.945 | -0.196 | 0.337 | 0.867 | 2.260 | 29736 |
+| GBM | 1.370 | 0.924 | 3.941 | -0.180 | 0.335 | 0.871 | 2.246 | 29736 |
 
 Latest window:
 | model | MAE | sMAE | sRMSE | bias | sPinball | cover80 | width_s | n |
 |---|---|---|---|---|---|---|---|---|
-| Blend | 1.331 | 0.554 | 1.060 | -0.161 | 0.192 | 0.873 | 1.882 | 4704 |
+| Blend | 1.339 | 0.558 | 1.062 | -0.140 | 0.188 | 0.875 | 1.778 | 4704 |
 | EWMA 14d | 1.358 | 0.558 | 1.060 | -0.112 | 0.192 | 0.791 | 1.523 | 4704 |
 | EWMA 3d | 1.407 | 0.572 | 1.078 | -0.052 | 0.196 | 0.796 | 1.644 | 4704 |
 | EWMA 7d | 1.367 | 0.556 | 1.053 | -0.045 | 0.192 | 0.804 | 1.613 | 4704 |
 | Fast-up 7/28d | 1.391 | 0.580 | 1.055 | 0.055 | 0.190 | 0.814 | 1.687 | 4704 |
 | Flat 28d | 1.374 | 0.555 | 1.052 | -0.018 | 0.193 | 0.794 | 1.559 | 4704 |
-| GBM | 1.315 | 0.556 | 1.076 | -0.210 | 0.201 | 0.873 | 2.241 | 4704 |
+| GBM | 1.336 | 0.567 | 1.083 | -0.169 | 0.194 | 0.882 | 2.033 | 4704 |
 
 
 ### Heavy day (probability)
 All origins:
 | model | Brier | LogLoss | base_rate | n | AUC |
 |---|---|---|---|---|---|
-| Blend | 0.093 | 0.330 | 0.106 | 29736 | 0.654 |
+| Blend | 0.093 | 0.330 | 0.106 | 29736 | 0.652 |
 | Clim 10% | 0.095 | 0.339 | 0.106 | 29736 | 0.500 |
-| GBM | 0.094 | 0.336 | 0.106 | 29736 | 0.640 |
+| GBM | 0.094 | 0.337 | 0.106 | 29736 | 0.638 |
 | Recent 28d | 0.095 | 0.340 | 0.106 | 29736 | 0.649 |
 
 Latest window:
 | model | Brier | LogLoss | base_rate | n | AUC |
 |---|---|---|---|---|---|
-| Blend | 0.125 | 0.409 | 0.161 | 4704 | 0.713 |
+| Blend | 0.125 | 0.408 | 0.161 | 4704 | 0.714 |
 | Clim 10% | 0.139 | 0.458 | 0.161 | 4704 | 0.500 |
-| GBM | 0.128 | 0.419 | 0.161 | 4704 | 0.701 |
+| GBM | 0.127 | 0.417 | 0.161 | 4704 | 0.704 |
 | Recent 28d | 0.127 | 0.420 | 0.161 | 4704 | 0.701 |
 
 
@@ -162,13 +162,13 @@ Latest window:
 
 ## Skill vs simple baselines (all origins)
 
-- alerts, GBM: `GBM` vs `EWMA 14d` skill = -5.3% (90% block-bootstrap CI -7.2% .. -3.8%)
+- alerts, GBM: `GBM` vs `EWMA 14d` skill = -6.1% (90% block-bootstrap CI -7.9% .. -4.5%)
 
-- hours, GBM: `GBM` vs `Flat 28d` skill = -5.5% (90% block-bootstrap CI -7.9% .. -3.6%)
+- hours, GBM: `GBM` vs `Flat 28d` skill = -4.6% (90% block-bootstrap CI -7.0% .. -2.5%)
 
-- heavy day, Blend: `Blend` vs `Clim 10%` skill = +2.2% (90% block-bootstrap CI +0.3% .. +4.1%)
+- heavy day, Blend: `Blend` vs `Clim 10%` skill = +2.1% (90% block-bootstrap CI +0.1% .. +4.0%)
 
-- heavy day, GBM: `GBM` vs `Clim 10%` skill = +1.5% (90% block-bootstrap CI -0.3% .. +3.3%)
+- heavy day, GBM: `GBM` vs `Clim 10%` skill = +1.3% (90% block-bootstrap CI -0.5% .. +3.2%)
 
 
 ## Diagnostics
@@ -208,12 +208,12 @@ Loss differential = loss(reference) - loss(model) per target day (mean over regi
 | alerts | Fast-up 7/28d | Flat 28d | h=1 | 180 | 0.0275 | 3.2884 | 0.0012 |
 | alerts | Fast-up 7/28d | Flat 28d | h=7 | 174 | 0.0251 | 2.4197 | 0.0166 |
 | alerts | Fast-up 7/28d | Flat 28d | all h | 180 | 0.0249 | 2.3644 | 0.0191 |
-| alerts | GBM | Flat 28d | h=1 | 180 | -0.0454 | -5.0028 | 0.0000 |
-| alerts | GBM | Flat 28d | h=7 | 174 | -0.0419 | -3.6259 | 0.0004 |
-| alerts | GBM | Flat 28d | all h | 180 | -0.0406 | -4.2320 | 0.0000 |
-| alerts | Blend | Flat 28d | h=1 | 180 | 0.0001 | 0.0108 | 0.9914 |
-| alerts | Blend | Flat 28d | h=7 | 174 | -0.0007 | -0.0962 | 0.9234 |
-| alerts | Blend | Flat 28d | all h | 180 | 0.0007 | 0.1156 | 0.9081 |
+| alerts | GBM | Flat 28d | h=1 | 180 | -0.0545 | -5.5760 | 0.0000 |
+| alerts | GBM | Flat 28d | h=7 | 174 | -0.0430 | -3.8983 | 0.0001 |
+| alerts | GBM | Flat 28d | all h | 180 | -0.0476 | -4.6273 | 0.0000 |
+| alerts | Blend | Flat 28d | h=1 | 180 | -0.0039 | -0.5871 | 0.5579 |
+| alerts | Blend | Flat 28d | h=7 | 174 | -0.0007 | -0.0885 | 0.9296 |
+| alerts | Blend | Flat 28d | all h | 180 | -0.0023 | -0.3502 | 0.7266 |
 | hours | EWMA 14d | Flat 28d | h=1 | 180 | -0.0009 | -0.1451 | 0.8848 |
 | hours | EWMA 14d | Flat 28d | h=7 | 174 | -0.0006 | -0.0784 | 0.9376 |
 | hours | EWMA 14d | Flat 28d | all h | 180 | -0.0012 | -0.2012 | 0.8408 |
@@ -226,21 +226,21 @@ Loss differential = loss(reference) - loss(model) per target day (mean over regi
 | hours | Fast-up 7/28d | Flat 28d | h=1 | 180 | -0.0155 | -1.5292 | 0.1280 |
 | hours | Fast-up 7/28d | Flat 28d | h=7 | 174 | -0.0150 | -1.1165 | 0.2657 |
 | hours | Fast-up 7/28d | Flat 28d | all h | 180 | -0.0128 | -1.1444 | 0.2540 |
-| hours | GBM | Flat 28d | h=1 | 180 | -0.0697 | -6.5053 | 0.0000 |
-| hours | GBM | Flat 28d | h=7 | 174 | -0.0506 | -4.2719 | 0.0000 |
-| hours | GBM | Flat 28d | all h | 180 | -0.0565 | -4.5228 | 0.0000 |
-| hours | Blend | Flat 28d | h=1 | 180 | -0.0179 | -2.3795 | 0.0184 |
-| hours | Blend | Flat 28d | h=7 | 174 | -0.0120 | -1.2656 | 0.2074 |
-| hours | Blend | Flat 28d | all h | 180 | -0.0159 | -1.8312 | 0.0687 |
+| hours | GBM | Flat 28d | h=1 | 180 | -0.0609 | -5.8677 | 0.0000 |
+| hours | GBM | Flat 28d | h=7 | 174 | -0.0403 | -3.1773 | 0.0018 |
+| hours | GBM | Flat 28d | all h | 180 | -0.0492 | -3.5969 | 0.0004 |
+| hours | Blend | Flat 28d | h=1 | 180 | -0.0136 | -1.6994 | 0.0910 |
+| hours | Blend | Flat 28d | h=7 | 174 | -0.0063 | -0.5974 | 0.5510 |
+| hours | Blend | Flat 28d | all h | 180 | -0.0119 | -1.2521 | 0.2122 |
 | heavy | Clim 10% | Recent 28d | h=1 | 180 | -0.0258 | -1.7336 | 0.0847 |
 | heavy | Clim 10% | Recent 28d | h=7 | 174 | 0.0125 | 0.7312 | 0.4657 |
 | heavy | Clim 10% | Recent 28d | all h | 180 | -0.0006 | -0.0318 | 0.9746 |
-| heavy | GBM | Recent 28d | h=1 | 180 | 0.0016 | 0.1678 | 0.8669 |
-| heavy | GBM | Recent 28d | h=7 | 174 | 0.0258 | 2.4740 | 0.0143 |
-| heavy | GBM | Recent 28d | all h | 180 | 0.0118 | 0.9762 | 0.3303 |
-| heavy | Blend | Recent 28d | h=1 | 180 | 0.0158 | 3.2746 | 0.0013 |
-| heavy | Blend | Recent 28d | h=7 | 174 | 0.0278 | 4.9619 | 0.0000 |
-| heavy | Blend | Recent 28d | all h | 180 | 0.0206 | 3.3103 | 0.0011 |
+| heavy | GBM | Recent 28d | h=1 | 180 | 0.0025 | 0.2759 | 0.7830 |
+| heavy | GBM | Recent 28d | h=7 | 174 | 0.0241 | 2.4738 | 0.0143 |
+| heavy | GBM | Recent 28d | all h | 180 | 0.0101 | 0.9106 | 0.3637 |
+| heavy | Blend | Recent 28d | h=1 | 180 | 0.0152 | 3.2562 | 0.0014 |
+| heavy | Blend | Recent 28d | h=7 | 174 | 0.0258 | 4.8889 | 0.0000 |
+| heavy | Blend | Recent 28d | all h | 180 | 0.0186 | 3.1942 | 0.0017 |
 | massive_day | Recent 28d | Clim | h=1 | 180 | 0.0244 | 0.6103 | 0.5425 |
 | massive_day | Recent 28d | Clim | h=7 | 174 | -0.0295 | -0.5715 | 0.5684 |
 | massive_day | Recent 28d | Clim | all h | 180 | -0.0147 | -0.3096 | 0.7572 |

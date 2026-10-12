@@ -73,3 +73,10 @@ def test_dm_detects_better_model():
     stat, p = G.dm_test(d, 1)
     assert stat > 0 and p < 0.01
     assert G.dm_test(rng.normal(size=300), 1)[1] > 0.01
+
+
+def test_adjacency_symmetric_and_complete():
+    from airalerts.geography import ADJACENCY as A
+    assert all(a in A[b] for a, ns in A.items() for b in ns)
+    if (C.RAW_DIR / C.VOLUNTEER_FILE).exists():
+        assert set(A) == set(data.build_panel().regions)

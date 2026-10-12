@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 
 from . import config as C
+from .geography import ADJACENCY
 from .data import Panel
 from . import targets as T
 
@@ -62,6 +63,18 @@ def regional_features(panel: Panel, heavy: pd.Series) -> pd.DataFrame:
     f["hv_r7"] = HV.rolling(7, min_periods=1).mean()
     f["hv_r28"] = HV.rolling(28, min_periods=1).mean()
     f["since_heavy"] = _days_since(HV)
+    # spatial signal: mean over land neighbours of scale-free regime indicators (neighbours' level tends to move first)
+    W = pd.DataFrame(0.0, index=N.columns, columns=N.columns)
+    for r, nb in ADJACENCY.items():
+        for q in nb:
+            if r in W.index and q in W.columns:
+                W.loc[r, q] = 1.0
+    W = W.div(W.sum(axis=1).replace(0, np.nan), axis=0).fillna(0.0)
+    nb = lambda x: pd.DataFrame(x.fillna(1.0).values @ W.values.T, index=x.index, columns=x.columns)
+    f["nb_n_r7_28"] = nb(f["n_r7_28"])
+    f["nb_h_r7_28"] = nb(f["h_r7_28"])
+    f["nb_n_r3_28"] = nb(f["n_m3"] / (f["n_m28"] + N_EPS))
+    f["nb_hv_r7"] = nb(f["hv_r7"])
     # empirical 56-day quantiles (used by the baselines to build prediction intervals)
     for q in C.QUANTILES:
         qq = int(q * 100)
