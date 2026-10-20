@@ -4,3 +4,5 @@ __pycache__/
 reports/cache/
 data/raw/*.csv
 *.pkl
+data/*.csv
+reports/kyiv_city/
